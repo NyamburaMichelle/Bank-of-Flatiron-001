@@ -12,7 +12,7 @@ function Search() {
 
   const fetchTransactions = async () => {
     try {
-      const response = await fetch("http://localhost:8001/transactions");
+      const response = await fetch("https://bank-of-flatiron-001.onrender.com/transactions");
       const data = await response.json();
       setTransactions(data);
       setFilteredTransactions(data); // Initialize filtered transactions with all transactions

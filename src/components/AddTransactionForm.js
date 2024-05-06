@@ -9,7 +9,7 @@ function AddTransactionForm() {
   });
 
   function postData() {
-    fetch("http://localhost:8001/transactions", {
+    fetch("https://bank-of-flatiron-001.onrender.com/transactions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -7,7 +7,7 @@ function Transaction() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch("http://localhost:8001/transactions");
+        const response = await fetch("https://bank-of-flatiron-001.onrender.com/transactions");
         const data = await response.json();
         setTransactions(data);
       } catch (error) {
@@ -22,7 +22,7 @@ function Transaction() {
   
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:8001/transactions/${id}`, {
+      await fetch(`https://bank-of-flatiron-001.onrender.com/transactions/${id}`, {
         method: 'DELETE'
       });
     
