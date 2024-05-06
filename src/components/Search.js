@@ -21,21 +21,27 @@ function Search() {
     }
   };
 
-  useEffect(() => {
-    // Filter transactions based on the search query whenever it changes
-    filterTransactions();
-  }, [searchQuery, transactions]);
-
   const filterTransactions = () => {
-    const filtered = transactions.filter((transaction) =>
-      transaction.description.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredTransactions(filtered);
+    // Check if searchQuery is not empty before filtering
+    if (searchQuery.trim() !== "") {
+      const filtered = transactions.filter((transaction) =>
+        transaction.description.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredTransactions(filtered);
+    } else {
+      // If searchQuery is empty, show no transactions
+      setFilteredTransactions([]);
+    }
   };
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  useEffect(() => {
+    // Filter transactions based on the search query whenever it changes
+    filterTransactions();
+  }, [searchQuery, transactions]);
 
   return (
     <div>
@@ -49,14 +55,16 @@ function Search() {
         <i className="circular search link icon"></i>
       </div>
       <div>
-        {/* Display filtered transactions */}
-        <ul>
-          {filteredTransactions.map((transaction) => (
-            <li key={transaction.id}>
-              {transaction.description} - {transaction.amount}
-            </li>
-          ))}
-        </ul>
+        {/* Display filtered transactions if searchQuery is not empty */}
+        {searchQuery.trim() !== "" && (
+          <ul>
+            {filteredTransactions.map((transaction) => (
+              <li key={transaction.id}>
+                {transaction.description} - {transaction.amount}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
